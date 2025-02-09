@@ -3,7 +3,7 @@ body {
     background: linear-gradient(to right, #a6808c, #ccb7ae);
     text-align: center;
     padding: 50px;
-    color: #4a154b;
+    color: #946774;
 }
 
 .container {
@@ -16,13 +16,13 @@ body {
 }
 
 h1, h2 {
-    color: #ff4a6e;
+    color: #565264;
     font-weight: bold;
 }
 
 .subtitle {
     font-size: 18px;
-    color: #7b287d;
+    color: #706677;
     margin-bottom: 20px;
 }
 
@@ -30,12 +30,12 @@ input[type=text], input[type=number] {
     padding: 12px;
     width: 80%;
     border-radius: 8px;
-    border: 2px solid #ff4a6e;
+    border: 2px solid #946774;
     margin-bottom: 15px;
 }
 
 button.btn {
-    background-color: #ff4a6e;
+    background-color: #a6808c;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -46,7 +46,7 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #e63950;
+    background-color: #a6808c;
 }
 
 .recommendations {
@@ -75,7 +75,7 @@ button.btn:hover {
 .quiz-question {
     font-size: 18px;
     font-weight: bold;
-    color: #7b287d;
+    color: #946774;
 }
 
 .quiz-options {
@@ -86,7 +86,7 @@ button.btn:hover {
 .quiz-options li {
     padding: 8px;
     margin: 5px;
-    background: #ffccd5;
+    background: #ffffff;
     border-radius: 8px;
 }
 
@@ -94,7 +94,7 @@ a.btn {
     display: inline-block;
     margin-top: 20px;
     text-decoration: none;
-    background: #ff4a6e;
+    background: #946774;
     color: white;
     padding: 12px 25px;
     border-radius: 25px;
@@ -102,5 +102,5 @@ a.btn {
 }
 
 a.btn:hover {
-    background: #e63950;
+    background: #946774;
 }
