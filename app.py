@@ -1,21 +1,36 @@
 from flask import Flask, render_template, request
-from transformers import pipeline
+from huggingface_hub import InferenceClient
 
+# Initialize the Hugging Face InferenceClient with your API key
+client = InferenceClient(
+    provider="together",
+    api_key=""  # Replace with your actual API key
+)
+
+# Initialize Flask app
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# Load a text-generation model (GPT-2)
-generator = pipeline("text-generation", model="gpt2")
-
+# Function to generate learning material
 def generate_learning_material(topic, difficulty):
     # Modify the prompt to be more specific in asking for detailed lesson plans.
-    prompt = f"Give information on improving a student's knowledge for the {topic} based on the {difficulty} level."
+    prompt = f"Give information on improving a student's knowledge for the {topic} based on the {difficulty} level. Just give the information, don't reiterate what I'm asking from you."
 
-    response = generator(prompt, max_length=500, do_sample=True)
-    generated_text = response[0]["generated_text"]
+    # Prepare the message for the API request
+    messages = [{"role": "user", "content": prompt}]
+    
+    # Request completion from the model
+    completion = client.chat.completions.create(
+        model="deepseek-ai/DeepSeek-V3", 
+        messages=messages, 
+        max_tokens=500
+    )
+
+    # Extract the generated text
+    generated_text = completion.choices[0].message['content']
 
     # Clean up the text, removing extra line breaks or formatting issues
     learning_steps = generated_text.split('\n')
@@ -23,14 +38,23 @@ def generate_learning_material(topic, difficulty):
     # Return a list of formatted learning steps
     return [step.strip() for step in learning_steps if step.strip()]
 
-
-
+# Function to generate quiz questions
 def generate_quiz(topic, difficulty):
     # Adjust the prompt to specify the number of questions and the structure
-    prompt = f"Create a {difficulty} level multiple-choice quiz for the topic {topic}. Include 3 questions with 4 answer options each. Format: 'Question: option1, option2, option3, option4'"
+    prompt = f"Create a {difficulty} level multiple-choice quiz for the topic {topic}. Include 3 questions with 4 answer options each. Don't reiterate what I'm asking from you. Format: 'Question: option1, option2, option3, option4'"
 
-    response = generator(max_length=400, do_sample=True)
-    generated_text = response[0]["generated_text"]
+    # Prepare the message for the API request
+    messages = [{"role": "user", "content": prompt}]
+    
+    # Request completion from the model
+    completion = client.chat.completions.create(
+        model="deepseek-ai/DeepSeek-V3", 
+        messages=messages, 
+        max_tokens=400
+    )
+
+    # Extract the generated text
+    generated_text = completion.choices[0].message['content']
 
     # Format the output properly by splitting at new lines and cleaning up the text
     quiz_questions = []
@@ -47,8 +71,6 @@ def generate_quiz(topic, difficulty):
             })
 
     return quiz_questions
-
-
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
@@ -83,4 +105,3 @@ def submit_quiz():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
