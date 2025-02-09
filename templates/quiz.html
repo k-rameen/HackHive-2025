@@ -1,46 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnSmart Recommendations ✨</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="title">💡 Your Personalized Learning Path! 💡</h1>
-        <h2 class="difficulty">✨ Difficulty Level: {{ difficulty.capitalize() }} ✨</h2>
-        <p class="subtitle">Based on your choices, here's what we recommend! 🎀</p>
-        
-        <ul class="recommendations">
-            {% for item in recommendations %}
-                <li>🌸 {{ item }}</li>
-            {% endfor %}
-        </ul>
-        
-        <h2 class="quiz-title">📚 Time for a Fun Quiz! 🎉</h2>
-        <form method="POST" action="/submit_quiz">
-            <div class="quiz-container">
-                {% for question in quiz_questions %}
-                    <div class="quiz-question-container">
-                        <p class="quiz-question">💭 {{ question.question }}</p>
-                        <ul class="quiz-options">
-                            {% for option in question.options %}
-                                <li>
-                                    <input type="radio" name="q{{ loop.index }}" value="{{ option }}" required>
-                                    🌟 {{ option }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-            </div>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>✧･ﾟ SkillCheck Recommendations ✧･ﾟ</title>
+     <link rel="stylesheet" href="/static/style.css">
+ </head>
+ <body>
+     <div class="container">
+         <h1 class="title">✼ Your Personalized Learning Path! ✼</h1>
+         <h2 class="difficulty">✧ Difficulty Level: {{ difficulty if difficulty is string else difficulty|string }} ✧</h2>
+         <ul class="recommendations">
+             {% for item in recommendations %}
+                 <li> ♥ {{ item }}</li>
+             {% endfor %}
+         </ul>
+         
+         <h2 class="quiz-title">📚 Time for a Fun Quiz! 🎉</h2>
+         <form method="POST" action="/submit_quiz">
+             <div class="quiz-container">
+                 {% for question in quiz_questions %}
+                     <div class="quiz-question-container">
+                         <p class="quiz-question">💭 {{ question.question }}</p>
+                         <ul class="quiz-options">
+                             {% for option in question.options %}
+                                 <li>
+                                     <input type="radio" name="q{{ loop.index }}" value="{{ option }}" required>
+                                     ✿ {{ option }}
+                                 </li>
+                             {% endfor %}
+                         </ul>
+                     </div>
+                 {% endfor %}
+             </div>
+ 
+             <button type="submit" class="btn">♥ Submit Quiz ♥</button>
+         </form>
+ 
+         <a href="/" class="btn"> Go Back </a>
+     </div>
+ </body>
+ </html>
 
-            <button type="submit" class="btn">💖 Submit Quiz 💖</button>
-        </form>
-
-        <a href="/" class="btn">🏡 Go Back 🏡</a>
-    </div>
-</body>
-</html>
-
+ 
