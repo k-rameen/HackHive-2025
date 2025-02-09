@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSmart Recommendations ✨</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">💡 Your Personalized Learning Path! 💡</h1>
+        <h2 class="difficulty">✨ Difficulty Level: {{ difficulty.capitalize() }} ✨</h2>
+        <p class="subtitle">Based on your choices, here's what we recommend! 🎀</p>
+        
+        <ul class="recommendations">
+            {% for item in recommendations %}
+                <li>🌸 {{ item }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h2 class="quiz-title">📚 Time for a Fun Quiz! 🎉</h2>
+        <div class="quiz-container">
+            {% for question in quiz_questions %}
+                <p class="quiz-question">💭 {{ question.question }}</p>
+                <ul class="quiz-options">
+                    {% for option in question.options %}
+                        <li><input type="radio" name="q{{ loop.index }}" value="{{ option }}"> 🌟 {{ option }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+        
+        <button class="btn">💖 Submit Quiz 💖</button>
+        <a href="/" class="btn">🏡 Go Back 🏡</a>
+    </div>
+</body>
+</html>
