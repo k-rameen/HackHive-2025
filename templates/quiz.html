@@ -19,19 +19,28 @@
         </ul>
         
         <h2 class="quiz-title">📚 Time for a Fun Quiz! 🎉</h2>
-        <div class="quiz-container">
-            {% for question in quiz_questions %}
-                <p class="quiz-question">💭 {{ question.question }}</p>
-                <ul class="quiz-options">
-                    {% for option in question.options %}
-                        <li><input type="radio" name="q{{ loop.index }}" value="{{ option }}"> 🌟 {{ option }}</li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        </div>
-        
-        <button class="btn">💖 Submit Quiz 💖</button>
+        <form method="POST" action="/submit_quiz">
+            <div class="quiz-container">
+                {% for question in quiz_questions %}
+                    <div class="quiz-question-container">
+                        <p class="quiz-question">💭 {{ question.question }}</p>
+                        <ul class="quiz-options">
+                            {% for option in question.options %}
+                                <li>
+                                    <input type="radio" name="q{{ loop.index }}" value="{{ option }}" required>
+                                    🌟 {{ option }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn">💖 Submit Quiz 💖</button>
+        </form>
+
         <a href="/" class="btn">🏡 Go Back 🏡</a>
     </div>
 </body>
 </html>
+
