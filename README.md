@@ -17,7 +17,6 @@ We originally planned to integrate Azure Cognitive Services for Text-to-Speech (
 Technologies Used
 
 TECHNOLOGY	HOW IT WAS USED
-React.js	For building the interactive front-end
 Python (Flask)	Backend framework for API handling
 Hugging Face API	For AI-generated quiz questions and explanations
 Azure Cognitive Services (Planned)	TTS and STT features for accessibility (partially integrated)
